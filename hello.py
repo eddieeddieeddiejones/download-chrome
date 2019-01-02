@@ -4,11 +4,12 @@ import os
 
 app = Flask(__name__)
 
-# http://localhost:5000/downlaod/a.rar
+# http://localhost:5000/download/a.rar
 @app.route('/download/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     # uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
     uploads = os.path.join(current_app.root_path, './source')
+    print(uploads)
     return send_from_directory(directory=uploads, filename=filename)
 
 @app.route('/')
