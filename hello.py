@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import send_file, send_from_directory, current_app
+from flask import send_file, send_from_directory, current_app, render_template
 import os
 
 app = Flask(__name__)
@@ -14,4 +14,5 @@ def download(filename):
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    # return '<html><body><h1>HelloWorld</h1></body></html>'
+    return render_template('hello.html')
