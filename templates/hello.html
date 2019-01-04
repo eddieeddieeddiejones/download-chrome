@@ -8,7 +8,7 @@
     <title>Document</title>
     <style>
         .con {
-            width: 1100px;
+            // width: 1100px;
             margin: 0 auto;
         }
         .con button {
@@ -37,13 +37,31 @@
     </style>
 </head>
 <body>
-    <div class="con">
-        <button>chrome 下载</button>
-        <p class="num">已下载 100 次</p>
-        <div class="atti">
-            <span>👍 2</span>
-            <span>👎 100</span>
-        </div>
+<div class="con">
+    <button>chrome 下载</button>
+    <p class="num">已下载 100 次</p>
+    <div class="atti">
+        <span>👍 2</span>
+        <span>👎 100</span>
     </div>
+</div>
+<script>
+    // MacIntel
+    // console.log(window.navigator.platform)
+    var downloadButton = document.querySelector('.con button')
+    downloadButton.onclick = function (e) {
+        console.log(e)
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST', '/test', true)
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        xhr.send('name="haha"')
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText)
+            }
+        }
+    }
+</script>
 </body>
 </html>
