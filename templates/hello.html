@@ -7,27 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        a {
+            text-decoration: none;
+        }
         .con {
-            // width: 1100px;
             margin: 0 auto;
+            margin-top: 50px;
         }
-        .con button {
-            background-color: #00fff4;
-            border: none;
-            margin-top: 100px;
+        .con .download a {
             display: block;
-            margin: 100px auto 0;
-            width: 100px;
+            width: 240px;
             height: 30px;
-            border-radius: 5px;
+            line-height: 30px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #91ff00;
+            margin-top: 20px;
+            color: black;
+            cursor: pointer;
         }
+
         .con .num {
-            // margin: 0 auto;
             text-align: center;
             font-size: 12px;
         }
         .con .atti {
-            // text-align: center;
+            text-align: center;
             font-size: 12px;
             display: flex;
             width: 120px;
@@ -38,7 +43,13 @@
 </head>
 <body>
 <div class="con">
-    <button>chrome 下载</button>
+    <div class="download">
+        <a href="/download/71.0.3578.98_chrome_installer.exe">chrome-win64 安装包下载</a>
+        <a href="/download/win32.exe">chrome-win32 安装包下载</a>
+        <a href="/download/com.android.chrome_71.0.3578.98-357809800.apk">chrome-安卓 安装包下载</a>
+        <a href="/download/fake-mac.img">chrome-苹果 安装包下载</a>
+    </div>
+
     <p class="num">已下载 100 次</p>
     <div class="atti">
         <span>👍 2</span>
@@ -46,22 +57,6 @@
     </div>
 </div>
 <script>
-    // MacIntel
-    // console.log(window.navigator.platform)
-    var downloadButton = document.querySelector('.con button')
-    downloadButton.onclick = function (e) {
-        console.log(e)
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', '/test', true)
-        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-        xhr.send('name="haha"')
-
-        xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                console.log(this.responseText)
-            }
-        }
-    }
 </script>
 </body>
 </html>
