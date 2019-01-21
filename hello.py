@@ -17,10 +17,13 @@ app.debug = True
 @app.route('/download/<path:filename>', methods=['GET'])
 def download(filename):
     cursor = db.cursor()
-    cursor.execute('SELECT * FROM countnumber')
-    data = cursor.fetchall()
-    print('Database data: %s' % data)
-    db.close()
+    sql = "UPDATE countnumber SET download = download + 1 WHERE name='count'"
+
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        db.rollback()
 
     uploads = os.path.join(current_app.root_path, './source')
     return send_from_directory(directory=uploads, filename=filename)
