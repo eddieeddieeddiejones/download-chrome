@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
-from flask import send_file, send_from_directory, current_app, render_template, request
+from flask import send_file, send_from_directory, current_app, render_template, request, jsonify
 import os
 import pymysql
 
@@ -27,6 +27,28 @@ def download(filename):
 
     uploads = os.path.join(current_app.root_path, './source')
     return send_from_directory(directory=uploads, filename=filename)
+
+@app.route('/downloadtimes', methods=['GET'])
+def downloadtimes():
+    name = request.values.get('name')
+    cursor = db.cursor()
+    sql = 'SELECT * FROM countnumber WHERE name="%s"' % name
+    print(sql)
+    try:
+        cursor.execute(sql)
+        data = cursor.fetchone()
+        num = data[4]
+        resData = {
+            'rescode': 0,
+            'resmsg': 'success',
+            'resdata': {
+                'count': num
+            }
+        }
+        return jsonify(resData)
+    except:
+        db.rollback()
+        return 'server error'
 
 @app.route('/')
 def hello_world():

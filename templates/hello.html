@@ -50,13 +50,35 @@
         <a href="/download/fake-mac.img">chrome-苹果 安装包下载</a>
     </div>
 
-    <p class="num">已下载 100 次</p>
+    <p class="num">已下载 <span class="number">0</span> 次</p>
     <div class="atti">
         <span>👍 2</span>
         <span>👎 100</span>
     </div>
 </div>
 <script>
+    function init() {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', '/downloadtimes?name=count', true)
+        // post请求要设置请求头
+        // xhr.setRequestHeader(“Content-Type”,”application/x-www-form-urlencoded”)
+        xhr.send(null)
+
+        xhr.onreadystatechange = function (res) {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText)
+                var data = JSON.parse(this.responseText)
+                if (data.rescode === 0) {
+                    downloadTimes = data.resdata.count
+                    var numDom = document.querySelector('.number')
+                    numDom.innerHTML = downloadTimes
+                }
+            }
+        }
+    }
+    window.onload = function () {
+        init()
+    }
 </script>
 </body>
 </html>
